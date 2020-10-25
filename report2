@@ -1,0 +1,273 @@
+#阅读程序
+
+##实验目的
+
+初步了解分析系统需求，从学生选课角度了解系统中的实体及其关系，学会定义类中的属性以及方法；
+
+掌握面向对象的类设计方法（属性、方法）；
+
+掌握类的继承用法，通过构造方法实例化对象；
+
+学会使用super()，用于实例化子类；
+
+掌握使用Object根类的toString（）方法,应用在相关对象的信息输出中。
+
+##实验过程 
+
+说明：学校有“人员”，分为“教师”和“学生”，教师教授“课程”，学生选择“课程”。从简化系统考虑，每名教师仅教授一门课程，每门课程的授课教师也仅有一位，每名学生选仅选一门课程。
+
+对象：	人员（编号、姓名、性别）
+
+教师（编号、姓名、性别、所授课程）
+
+			学生（编号、姓名、性别、所选课程）
+      
+			课程（编号、课程名称、上课地点、时间、授课教师）
+
+##实验结果
+
+package Information;
+
+public class Teachers extends People {
+	private String teacherName;
+	private String teacherId;
+public Teachers(int number,String name,String id,String course){
+	setNo(number);
+	setTeacherName(name);
+	setTeacherId(id);
+	setTeaCourse(course);
+}
+public int getNo(){
+	return num;	
+}
+void setNo(int number) {
+	this.num=number;	
+}
+public String getTeacherName(){
+	return teacherName;	
+}
+void setTeacherName(String teacherName) {
+	this.teacherName = teacherName;	
+}
+public String getTeacherId(){
+	return teacherId;	
+}
+void setTeacherId(String teacherId) {
+	this.teacherId = teacherId;	
+}
+public void setTeaCourse(String course) {
+	super.course=course;
+	}
+public String getTeaCourse() {
+	return super.course;
+	}
+}
+
+
+
+
+package Information;
+
+public class Students extends People {
+	private String studentName;
+	private String studentId;
+		
+public Students(int number,String name,String sex,String id,int course){
+	//setStudentChoose(choose);
+	setNo(number);
+	setStudentName(name);
+	setStudentId(id);
+	setCourses(course);
+	}
+//public void setStudentChoose(boolean choose) {
+	//if (choose == true)
+		//}
+public int getNo(){
+	return num;	
+}
+void setNo(int number) {
+	this.num=number;	
+}
+public String getStudentName(){
+	return studentName;	
+}
+void setStudentName(String studentName) {
+	this.studentName = studentName;	
+}
+public String getStudentId(){
+	return studentId;	
+}
+void setStudentId(String studentId) {
+	this.studentId = studentId;	
+}
+
+public void setCourses(int courses) {
+	super.courseNumber=courses;
+}
+public void addCourses(int courseNumber) {
+	this.courseNumber = courseNumber+1;
+}
+public void reduceCourses(int courseNumber) {
+	this.courseNumber = courseNumber-1;
+}
+public int getCourses() {
+	return courseNumber;
+}
+
+}
+
+
+
+
+package Information;
+
+public class Courses {
+	int num;
+	int stuNo;
+	String name;
+	String add;
+	
+public Courses(int number,String name,String add,int stuNo){
+	setNo(number);
+	setName(name);
+	setAdd(add);
+	setStuNo(stuNo);
+	}
+public int getNo(){
+	return num;	
+}
+void setNo(int number) {
+	this.num=number;	
+}
+public String getName(){
+	return name;	
+}
+void setName(String name) {
+	this.name = name;
+}
+public String getAdd(){
+		return add;	
+	}
+void setAdd(String add) {
+		this.add = add;	
+}
+public int getStuNo(){
+	return stuNo;	
+}
+void setStuNo(int stuNo) {
+	this.stuNo = stuNo;	
+}
+public void addStuNo(int stuNo) {
+	this.stuNo = stuNo+1;
+}
+public void reduceStuNo(int stuNo) {
+	this.stuNo = stuNo-1;
+}
+}
+
+
+
+
+package Information;
+
+public class People {
+public int num;
+public String id;
+public String name;
+public int courseNumber;//用数组length
+public char sex;//true 男，false 女
+public String course;//改成数组
+People(){}
+
+People(String id[],String name){
+	
+}
+public void setCourseNumber() {
+	
+	}
+void getCourseNumber() {
+	
+}
+}
+
+
+
+
+package Run;
+
+import Information.Courses;
+import Information.Teachers;
+import Information.Students;
+import java.util.Scanner;
+public abstract class Test2 {
+
+	public static void main(String[] args) {
+		// People peo0= new People();每次定义为一个人，再分学生老师
+		Students stu0 = new Students(1,"Lily","女","S1001",0);
+		//Students stu1 = new Students("S1002","Bob");
+		Teachers tea1 = new Teachers(1,"Sua","T1001","线性代数");
+		Courses cou0 = new Courses(1,"线性代数","教104",0);
+		
+		for(;;) {
+		System.out.println("<学生选课系统>");
+		System.out.println("<学生信息>");
+		System.out.println("编号   姓名   学号   课数");
+		System.out.println("  "+stu0.getNo()+"  "+stu0.getStudentName()+" "+stu0.getStudentId()+"   "+stu0.getCourses());
+		//System.out.println("Name:"+stu1.getStudentName()+"ID:"+stu1.getStudentId());
+		Scanner reader = new Scanner(System.in);
+		System.out.println("请输入学生编号：");
+		int x =reader.nextInt();
+		if(x==1) {//1号学生
+			System.out.println("选课：请输入1");
+			System.out.println("退课：请输入2");
+			int y =reader.nextInt();
+	        
+		if(y==1){//1为选课
+			System.out.println("<课程信息>");
+			System.out.println("编号   课程名称   教学地点   选课人数");
+			System.out.println("  "+cou0.getNo()+"      "+cou0.getName()+"     "+cou0.getAdd()+"           "+cou0.getStuNo());
+			System.out.println("请输入选择课程编号：");
+			int z =reader.nextInt();
+			if(z==1) {
+				cou0.addStuNo(cou0.getStuNo());
+				stu0.addCourses(stu0.getCourses());
+				System.out.println("选课人数"+cou0.getStuNo()+"选课数"+stu0.getCourses());
+				System.out.println("<教师信息>");
+				System.out.println("编号   姓名   学号   授课");
+				System.out.println("  "+tea1.getNo()+"  "+tea1.getTeacherName()+" "+tea1.getTeacherId()+" "+tea1.getTeaCourse());
+						}
+			else {
+				System.out.println("无此课程信息，请重新选择！");
+			}
+		}
+		else if(y==2) {//2为退课
+			System.out.println("<课程信息>");
+			System.out.println("编号   课程名称   教学地点   选课人数");
+			System.out.println("  "+cou0.getNo()+"      "+cou0.getName()+"     "+cou0.getAdd()+"           "+cou0.getStuNo());
+			System.out.println("请输入选择课程编号：");
+			int z =reader.nextInt();
+			if(z==1) {
+				cou0.reduceStuNo(cou0.getStuNo());
+				stu0.reduceCourses(stu0.getCourses());
+				System.out.println("选课人数"+cou0.getStuNo()+"选课数"+stu0.getCourses());
+				System.out.println("<教师信息>");
+				System.out.println("编号   姓名   学号   授课");
+				System.out.println("  "+tea1.getNo()+"  "+tea1.getTeacherName()+" "+tea1.getTeacherId()+" "+tea1.getTeaCourse());
+						}
+			else {
+				System.out.println("无此课程信息，请重新选择！");
+			}
+		}
+		else System.out.println("输入有误，请输入1~2");
+	}
+		else System.out.println("没有相关学生信息");
+	}
+	}
+}
+
+
+##实验感想 
+
+初步了解了分析系统需求、解系统中的实体及其关系和定义类中的属性以及方法。
+掌握面向对象的类设计方法和类的继承用法，通过构造方法实例化对象。
+掌握了super（）的使用，用于实例化子类和Object根类的toString（）方法,应用在相关对象的信息输出中。
